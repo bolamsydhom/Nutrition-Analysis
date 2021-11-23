@@ -1,0 +1,20 @@
+<nav>
+    <div class="nav-wrapper nav-dark bg-dark">
+        <a href="#" class="text-white brand-logo center">Add Ingredient</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-sm-12">
+            <input [(ngModel)]="ingredient" [typeahead]="(states$ | async) || []" [isAnimated]="true"
+                placeholder="100 gr Chicken" class="form-control" (keyup.enter)="onAddNewIngredient()">
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <ul>
+                <li *ngFor="let item of ingredientsArray$|async"> {{item}} </li>
+            </ul>
+        </div>
+    </div>
+</div>

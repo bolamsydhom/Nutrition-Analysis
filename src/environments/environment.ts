@@ -6,6 +6,13 @@ export const environment = {
   production: false
 };
 
+export const apiKeys = {
+  app_id: 'ebb97cb4',
+  app_key: '01953536eadfb1ceae52e21b51eebe7e'
+}
+
+export const baseUrl = 'https://api.edamam.com/api';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
