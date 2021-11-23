@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IngredientsAnlysisService } from 'src/app/_services/ingredients-anlysis.service';
 
@@ -11,7 +12,7 @@ export class AddIngredientComponent implements OnInit {
   states$!: Observable<[]>;
   ingredient: string = '';
   ingredientsArray$!: Observable<string[]>;
-  constructor(private _ingredientsService: IngredientsAnlysisService) {}
+  constructor(private _ingredientsService: IngredientsAnlysisService, private router: Router) {}
 
   ngOnInit(): void {
     this.states$ = this._ingredientsService.geIngredientsExamples();
@@ -29,5 +30,13 @@ export class AddIngredientComponent implements OnInit {
     }else{
       alert('Please enter valid ingredient ex: 100 gr chicken, 1 kg meat');
     }
+  }
+
+  onDeleteIngredient(ingredient: string) {
+    this._ingredientsService.deleteIngredient(ingredient);
+  }
+
+  onStartAnalysis() {
+    this.router.navigate(['/nutrition-analysis']);
   }
 }

@@ -1,0 +1,13 @@
+.pointer{
+    cursor: pointer;
+}
+
+.hover{
+    transition: all 0.3s ease-in-out;
+    padding: 5px 10px;
+    border-radius: 5px;
+    &:hover{
+        background-color: darkred;
+        color: white;
+    }
+}

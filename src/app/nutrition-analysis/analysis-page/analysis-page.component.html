@@ -1,1 +1,33 @@
-<p>analysis-page works!</p>
+<nav>
+    <div class="nav-wrapper nav-dark bg-dark p-3">
+        <a class="text-white mr-4" routerLink="">
+            < </a>
+                <a class="text-white brand-logo center">Analysis Ingredient</a>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+                <accordion-group *ngFor="let ingredient of ingredientsArray ; let i = index" [heading]="ingredient"
+                    (isOpenChange)="getNutData($event, i)">
+                    <pre>
+                        {{ ingredientAnalysisData$ |async|json}}
+                    </pre>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-3">
+        <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+            <button class="btn btn-primary" (click)="onAnalysisAllRecipe()">Analysis Full Recipe</button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="fullRecipeAnalysis$">
+        <pre> {{ fullRecipeAnalysis$ |async|json}}</pre>
+    </div>
+</div>

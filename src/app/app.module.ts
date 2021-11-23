@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddIngredientComponent } from './nutrition-analysis/add-ingredient/add-ingredient.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AnalysisPageComponent } from './nutrition-analysis/analysis-page/analysis-page.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { InterceptorService } from './_services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import { AnalysisPageComponent } from './nutrition-analysis/analysis-page/analys
     FormsModule,
     HttpClientModule,
     TypeaheadModule.forRoot(),
+    AccordionModule.forRoot(),
     
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

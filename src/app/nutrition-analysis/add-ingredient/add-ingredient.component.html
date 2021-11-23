@@ -1,5 +1,5 @@
 <nav>
-    <div class="nav-wrapper nav-dark bg-dark">
+    <div class="nav-wrapper nav-dark bg-dark p-3">
         <a href="#" class="text-white brand-logo center">Add Ingredient</a>
     </div>
 </nav>
@@ -13,8 +13,13 @@
 
         <div class="col-md-6 col-sm-12">
             <ul>
-                <li *ngFor="let item of ingredientsArray$|async"> {{item}} </li>
+                <li class="pointer hover" (click)="onDeleteIngredient(item)"  *ngFor="let item of ingredientsArray$|async"> {{item}} </li>
             </ul>
+        </div>
+    </div>
+    <div class="row mt-5 mb-3" *ngIf="(ingredientsArray$ | async)?.length">
+        <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+            <button class="btn btn-primary" (click)="onStartAnalysis()">Analysis Ingredients</button>
         </div>
     </div>
 </div>

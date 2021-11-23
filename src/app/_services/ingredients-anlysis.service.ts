@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { apiKeys, baseUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,17 @@ export class IngredientsAnlysisService {
     this.ingredientsArrayChanged.emit(this.ingredientsArray);
   }
 
+
+  getFullRecipeAnalysis():  Observable<any> {
+    const body = {
+      ingr: this.ingredientsArray,
+      title: ''
+    }
+    return this.http.post(baseUrl + '/nutrition-details', body) ;
+  }
+
+  getIngredientData(i: number): Observable<any>{
+    const params = {ingr: this.ingredientsArray[i]};
+    return this.http.get(baseUrl+'/nutrition-data', { params: params });
+  }
 }
