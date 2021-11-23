@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IngredientsAnlysisService } from 'src/app/_services/ingredients-anlysis.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AddIngredientComponent implements OnInit {
 
   ngOnInit(): void {
     this.states$ = this._ingredientsService.geIngredientsExamples();
-    this.ingredientsArray$ = this._ingredientsService.ingredientsArrayChanged;
+    this.ingredientsArray$ = of(this._ingredientsService.ingredientsArray) || this._ingredientsService.ingredientsArrayChanged;
   }
 
   onAddNewIngredient() {
