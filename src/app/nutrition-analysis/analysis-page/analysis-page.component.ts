@@ -5,26 +5,26 @@ import { IngredientsAnlysisService } from 'src/app/_services/ingredients-anlysis
 @Component({
   selector: 'app-analysis-page',
   templateUrl: './analysis-page.component.html',
-  styleUrls: ['./analysis-page.component.scss']
+  styleUrls: ['./analysis-page.component.scss'],
 })
 export class AnalysisPageComponent implements OnInit {
-  ingredientsArray!:string[];
-  ingredientAnalysisData$!: Observable<string[]>; 
+  ingredientsArray!: string[];
+  ingredientAnalysisData$!: Observable<string[]>;
   fullRecipeAnalysis$!: Observable<any>;
-  constructor(private _ingredientsService: IngredientsAnlysisService) { }
+  constructor(private _ingredientsService: IngredientsAnlysisService) {}
 
   ngOnInit(): void {
     this.ingredientsArray = this._ingredientsService.ingredientsArray;
   }
 
-  getNutData(e: boolean, i: number){
+  getNutData(e: boolean, i: number) {
     if (event) {
-      this.ingredientAnalysisData$ = this._ingredientsService.getIngredientData(i);
+      this.ingredientAnalysisData$ =
+        this._ingredientsService.getIngredientData(i);
     }
   }
 
-  onAnalysisAllRecipe(){
-   this.fullRecipeAnalysis$ =  this._ingredientsService.getFullRecipeAnalysis();
+  onAnalysisAllRecipe() {
+    this.fullRecipeAnalysis$ = this._ingredientsService.getFullRecipeAnalysis();
   }
-
 }
