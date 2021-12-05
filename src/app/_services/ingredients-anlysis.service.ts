@@ -31,8 +31,7 @@ export class IngredientsAnlysisService {
 
   getFullRecipeAnalysis():  Observable<any> {
     const body = {
-      ingr: this.ingredientsArray,
-      title: ''
+      ingr: this.ingredientsArray
     }
     return this.http.post(baseUrl + '/nutrition-details', body) ;
   }

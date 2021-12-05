@@ -15,6 +15,7 @@ export class AnalysisPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingredientsArray = this._ingredientsService.ingredientsArray;
+    this.onAnalysisAllRecipe();
   }
 
   getNutData(e: boolean, i: number) {

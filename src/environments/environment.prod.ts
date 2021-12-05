@@ -5,8 +5,8 @@ export const apiKeys: {
   app_id: string;
   app_key: string
 } = {
-  app_id: 'ebb97cb4',
-  app_key: '01953536eadfb1ceae52e21b51eebe7e'
+  app_id: '47379841',
+  app_key: 'd28718060b8adfd39783ead254df7f92'
 }
 
 export const baseUrl = 'https://api.edamam.com/api';
