@@ -7,27 +7,138 @@
 </nav>
 
 
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-12">
-            <accordion [isAnimated]="true" [closeOthers]="true">
-                <accordion-group class="acc" *ngFor="let ingredient of ingredientsArray ; let i = index" [heading]="ingredient"
-                    (isOpenChange)="getNutData($event, i)">
-                    <pre>
-                        {{ ingredientAnalysisData$ |async|json}}
-                    </pre>
-                </accordion-group>
-            </accordion>
+        <div class="col-6">
+            <table class="fl-table">
+                <thead>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Unit
+                    </th>
+                    <th>
+                        Food
+                    </th>
+                    <th>
+                        Calories
+                    </th>
+                    <th>
+                        weight
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ingredient of (fullRecipeAnalysis$ | async)?.ingredients ">
+                        <td>
+                            {{ingredient.parsed[0].quantity}}
+                        </td>
+                        <td>
+                            {{ingredient.parsed[0].measure}}
+                        </td>
+                        <td>
+                            {{ingredient.parsed[0].food}}
+                        </td>
+                        <td>
+                            {{math.floor(ingredient.parsed[0].nutrients.ENERC_KCAL.quantity)}}
+                        </td>
+
+                        <td>
+                            {{math.floor(ingredient.parsed[0].retainedWeight)}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4 offset-2">
+            <div class="receipt-container">
+                <div class="title">
+                    <h1>
+                        Nutrition Facts
+                    </h1>
+                </div>
+                <div class="header">
+                    <h6 class="mt-2">
+                        <b> Amount Per Serving</b>
+                    </h6>
+                    <div class="cal d-flex justify-content-between align-items-center">
+                        <h3>
+                            Calories
+                        </h3>
+                        <span>
+                            {{math.floor((fullRecipeAnalysis$ | async)?.totalNutrients.ENERC_KCAL.quantity)}}
+                        </span>
+                    </div>
+                </div>
+                <div class="body">
+                    <ul>
+                        <li>
+                            <span>
+                                <b> Total {{ (fullRecipeAnalysis$ |async)?.totalDaily.FAT.label}}</b> 18.3 g
+                            </span>
+                            <span>
+                                {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.FAT.quantity)}}
+                                {{(fullRecipeAnalysis$ | async)?.totalDaily.FAT.unit}}
+                            </span>
+                        </li>
+
+                        <ul class="inner-ul">
+                            <li>
+                                <span>
+                                    {{(fullRecipeAnalysis$ | async)?.totalDaily.FASAT.label}} Fat 2g
+                                </span>
+                                <span>
+                                    {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.FASAT.quantity)}}
+                                    {{(fullRecipeAnalysis$ | async)?.totalDaily.FASAT.unit}}
+                                </span>
+                            </li>
+                        </ul>
+
+                        <li>
+                            <span>
+                                <b> {{ (fullRecipeAnalysis$ |async)?.totalDaily.CHOLE.label}}</b> 0 mg
+                            </span>
+                            <span>
+                                {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.CHOLE.quantity)}}
+                                {{(fullRecipeAnalysis$ | async)?.totalDaily.CHOLE.unit}}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <b>{{ (fullRecipeAnalysis$ |async)?.totalDaily.NA.label}}</b> 70 mg
+                            </span>
+                            <span>
+                                {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.NA.quantity)}}
+                                {{(fullRecipeAnalysis$ | async)?.totalDaily.NA.unit}}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <b>{{ (fullRecipeAnalysis$ |async)?.totalDaily.NA.label}}</b> 70 mg
+                            </span>
+                            <span>
+                                {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.NA.quantity)}}
+                                {{(fullRecipeAnalysis$ | async)?.totalDaily.NA.unit}}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <b>{{ (fullRecipeAnalysis$ |async)?.totalDaily.PROCNT.label}}</b> 70.9 mg
+                            </span>
+                            <span>
+                                {{math.floor((fullRecipeAnalysis$ | async)?.totalDaily.PROCNT.quantity)}}
+                                {{(fullRecipeAnalysis$ | async)?.totalDaily.PROCNT.unit}}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row mt-5 mb-3">
-        <div class="col-md-12 col-sm-12 d-flex justify-content-center">
-            <button class="btn btn-primary" (click)="onAnalysisAllRecipe()">Analysis Full Recipe</button>
-        </div>
-    </div>
-
-    <div class="row" *ngIf="fullRecipeAnalysis$">
+    <!-- <div class="row" *ngIf="fullRecipeAnalysis$">
         <pre> {{ fullRecipeAnalysis$ |async|json}}</pre>
-    </div>
+    </div> -->
 </div>
+
+<ngx-spinner></ngx-spinner>
